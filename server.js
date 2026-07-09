@@ -25,16 +25,12 @@ app.get('/', async (req, res)=>{
 
 //this route will change often
 app.get('/fruits', async (req, res) => {
-    //create a fruit object
-    const fruitData = {}
-    fruitData.name = 'Blueberry'
-    fruitData.isReadyToEat = false
     
-    //use a mongoose method to add it to the db
-    let createdFruit = await Fruit.create(fruitData) //returns new fruit doc
+    //use a mongoose method to find fruits that are not ready
+    let notReady = await Fruit.find({isReadyToEat: false}) 
 
-    //view the created fruit
-    res.send(createdFruit)
+    //view the found fruit
+    res.send(notReady)
 })
 
 app.listen(3000, ()=>{
@@ -43,9 +39,21 @@ app.listen(3000, ()=>{
 })
 
 // Code Graveyard ===========
+//Create Fruits
 // const fruitData = {}
 //     fruitData.name = 'Blueberry'
 //     fruitData.isReadyToEat = false
     
 //     //use a mongoose method to add it to the db
 //     let createdFruit = await Fruit.create(fruitData) //returns new fruit doc
+
+//Find Fruits
+// //use a mongoose method to find all the fruits
+// let allFruits = await Fruit.find()
+
+//Find a specific fruit (case sensitive, it should be exactly as it is)
+// //use a mongoose method to find all the bananas
+//  let allBananas = await Fruit.find({name: 'Banana'}) 
+
+// //use a mongoose method to find fruits that are not ready
+// let notReady = await Fruit.find({isReadyToEat: false}) 
