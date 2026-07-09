@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Fruits</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
+<%- include('./partials/nav') %>
+
     <h1>Create a new fruit</h1>
 
     <form action="/fruits" method="POST">
@@ -21,12 +7,12 @@
          Name:
         <input type="text" id="name" name="name" />
         <br/>
-        <br/>
 
         <!-- <label for="isReadyToEat">Ready to eat?</label> -->
          Ready to eat?
-        <input type="checkbox" id="isReadyToEat" name="isReadyToEat"/>
-        <br/>
+        <div class="checkbox-div">
+            <input type="checkbox" id="isReadyToEat" name="isReadyToEat"/>
+        </div>
         <br/>
 
         <button type="submit">Add fruit</button>

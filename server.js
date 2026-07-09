@@ -5,6 +5,7 @@ const dotenv = require('dotenv').config() //makes .env file avaiable
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const path = require('path')
 
 const app = express()
 
@@ -22,6 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(morgan('dev'))
 
+//css
+app.use(express.static(path.join(__dirname, "public")))
+
 app.get('/', async (req, res)=>{
     res.render('home.ejs')
 })
@@ -36,7 +40,7 @@ app.get('/fruits/new', async (req, res) => {
 app.post('/fruits', async (req, res) => {
     const fruitData = {}
     fruitData.name = req.body.name
-    
+
     if (req.body.isReadyToEat === 'on'){
         fruitData.isReadyToEat = true
     } else {
@@ -44,7 +48,9 @@ app.post('/fruits', async (req, res) => {
     }
     
     let createdFruit = await Fruit.create(fruitData) 
+    
     res.send(createdFruit)
+    // res.redirect('/')
 })
 
 app.listen(3000, ()=>{
