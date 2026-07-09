@@ -5,7 +5,7 @@ const app = express()
 app.use(morgan('dev'))
 
 app.get('/', async (req, res)=>{
-    res.send('hello')
+    res.render('home.ejs')
 })
 
 
