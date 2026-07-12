@@ -36,21 +36,16 @@ app.get('/fruits/new', async (req, res) => {
     res.render('new.ejs')
 })
 
-//POST /fruits (creates fruit in database)
 app.post('/fruits', async (req, res) => {
-    const fruitData = {}
-    fruitData.name = req.body.name
+    
+})
 
-    if (req.body.isReadyToEat === 'on'){
-        fruitData.isReadyToEat = true
-    } else {
-        fruitData.isReadyToEat = false
-    }
-    
-    let createdFruit = await Fruit.create(fruitData) 
-    
-    res.send(createdFruit)
-    // res.redirect('/')
+app.get('/fruits', async(req, res)=>{
+    let allFruits = await Fruit.find()
+    console.log(allFruits)
+    res.render('index.ejs', {
+        allFruits //if key is the same as value 
+    })
 })
 
 app.listen(3000, ()=>{
@@ -96,3 +91,17 @@ app.listen(3000, ()=>{
     // fruitData.isReadyToEat
 
     // res.send(req.body.name)
+
+    // const fruitData = {}
+    // fruitData.name = req.body.name
+
+    // if (req.body.isReadyToEat === 'on'){
+    //     fruitData.isReadyToEat = true
+    // } else {
+    //     fruitData.isReadyToEat = false
+    // }
+    
+    // let createdFruit = await Fruit.create(fruitData) 
+    
+    // res.send(createdFruit)
+    // // res.redirect('/')
